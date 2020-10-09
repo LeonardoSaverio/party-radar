@@ -1,1 +1,1 @@
-# partyr-radar
+# party-radar
