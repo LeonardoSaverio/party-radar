@@ -8,6 +8,7 @@ import { FormHandles } from '@unform/core'
 import * as Yup from 'yup'
 import getValidationErrors from '../../utils/getValidationErrors'
 
+import api from '../../services/api'
 
 import Input from '../../components/Input'
 import Button from '../../components/Button'
@@ -34,12 +35,17 @@ const SignUp: React.FC = () => {
       const schema = Yup.object().shape({
         name: Yup.string().required('Nome obrigatório'),
         email: Yup.string().required('E-mail obrigatório').email('Digite um E-mail válido'),
-        password: Yup.string().required('Password obrigatório').min(6, 'No minímo 6 dígitos'),
+        password: Yup.string().required('Password obrigatório').min(8, 'No minímo 8 dígitos'),
       })
 
       await schema.validate(data, {
         abortEarly: false,
       })
+
+      await api.post('/users', data)
+      
+      Alert.alert('Cadastro realizado com sucesso!', 'Você já pode fazer o login na aplicação.')
+      navigation.goBack()
 
     } catch (err) {
       if (err instanceof Yup.ValidationError) {

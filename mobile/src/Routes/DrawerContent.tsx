@@ -6,9 +6,13 @@ import {
   Drawer,
 } from 'react-native-paper'
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
-import { MaterialCommunityIcons as Icon, MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons as Icon, MaterialIcons } from "@expo/vector-icons"
+import { useAuth } from '../hooks/auth'
 
 const DrawerContent: React.FC<any> = ({ navigation }) => {
+
+  const { signOut, user } = useAuth()
+
   return (
     <View style={{ flex: 1, backgroundColor: '#2A3C44' }}>
       <DrawerContentScrollView>
@@ -17,7 +21,7 @@ const DrawerContent: React.FC<any> = ({ navigation }) => {
 
             <View style={{ flexDirection: 'column' }}>
               <Title style={styles.title}> Seja bem vindo(a) </Title>
-              <Caption style={styles.caption}>Mariana Silva</Caption>
+              <Caption style={styles.caption}>{user.name}</Caption>
             </View>
 
           </View>
@@ -51,13 +55,7 @@ const DrawerContent: React.FC<any> = ({ navigation }) => {
               labelStyle={{ color: '#96A7AF' }}
               onPress={() => { navigation.navigate('MyPartys') }}
             />
-            <DrawerItem icon={({ color, size }) => (
-              <Icon name='settings' color={'#96A7AF'} size={size} />
-            )}
-              label="Configurações"
-              labelStyle={{ color: '#96A7AF' }}
-              onPress={() => { }}
-            />
+    
           </Drawer.Section>
         </View>
 
@@ -68,7 +66,7 @@ const DrawerContent: React.FC<any> = ({ navigation }) => {
         )}
           label="Sair"
           labelStyle={{ color: '#3DD598' }}
-          onPress={() => { }}
+          onPress={signOut}
         />
       </Drawer.Section>
     </View>
@@ -105,7 +103,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#286053'
 
   },
-  
+
 });
 
 

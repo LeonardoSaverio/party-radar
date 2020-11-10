@@ -139,6 +139,7 @@ const SignUp: React.FC = () => {
               />
               <Input
                 ref={cityInputRef}
+                maxLength={60}
                 returnKeyType="next"
                 autoCapitalize="sentences"
                 name="city"
@@ -150,6 +151,7 @@ const SignUp: React.FC = () => {
               />
               <Input
                 ref={partyNameInputRef}
+                maxLength={100}
                 returnKeyType="next"
                 autoCapitalize="sentences"
                 name="partyName"
@@ -161,6 +163,7 @@ const SignUp: React.FC = () => {
               />
               <Input
                 ref={typePartyInputRef}
+                maxLength={100}
                 returnKeyType="next"
                 autoCapitalize="sentences"
                 name="typeParty"

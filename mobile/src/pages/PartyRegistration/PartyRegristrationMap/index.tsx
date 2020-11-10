@@ -12,6 +12,9 @@ import LoadPositionButton from '../../../components/LoadPositionButton'
 
 import generatedMapStyle from '../../../utils/MapStyle'
 
+import api from '../../../services/api'
+
+
 import {
   Container,
   Title,
@@ -67,16 +70,17 @@ const PartyRegistrationMap: React.FC = () => {
 
   const data = route.params as DataPartyInfoAndDateTime
 
-  function handleRegister() {
+  async function handleRegister() {
     const dataRegister = {
-      city: data.partyInfo.city,
-      description: data.partyInfo.description,
-      partyName: data.partyInfo.partyName,
-      typeParty: data.partyInfo.typeParty,
-      uf: data.partyInfo.uf,
       whatsapp: data.partyInfo.whatsapp,
-      dateTime: data.dateTime,
-      latlng: location,
+      uf: data.partyInfo.uf,
+      city: data.partyInfo.city,
+      party_name: data.partyInfo.partyName,
+      type_party: data.partyInfo.typeParty,
+      description: data.partyInfo.description || ' ',
+      date_time: String(data.dateTime),
+      latitude: location[0],
+      longitude: location[1]
     }
 
     if (location[0] === 0) {
@@ -84,7 +88,20 @@ const PartyRegistrationMap: React.FC = () => {
       return
     }
 
-    console.log(dataRegister)
+    
+   const response = await api.post('/partys', dataRegister)
+    console.log(response)
+    Alert.alert('Sucesso', 'Festa cadastrada.', [
+      {
+        text: 'OK',
+        onPress() {
+
+          navigation.reset({
+            routes: [{ name: 'Home' }]
+          });
+        }
+      }
+    ])
 
   }
 
@@ -123,12 +140,12 @@ const PartyRegistrationMap: React.FC = () => {
                 }}
               >
                 <Marker
-                  coordinate={{ latitude: location[0], longitude: location[1] }}       
+                  coordinate={{ latitude: location[0], longitude: location[1] }}
                 >
                   <MapMarkerContainer>
                     <MapMarkerImage source={require('../../../assets/marker.png')} />
                     <MapMarkerTitle>
-                     
+
                     </MapMarkerTitle>
                   </MapMarkerContainer>
                 </Marker>
@@ -143,18 +160,7 @@ const PartyRegistrationMap: React.FC = () => {
             }
           </MapContainer>
           <ButtonContainer>
-            <Button onPress={() =>{
-              handleRegister
-              Alert.alert('Sucesso', 'Festa cadastrada.', [
-                {
-                  text: 'OK',
-                  onPress() {
-                    navigation.navigate('Home')
-                  }
-                }
-              ])
-             
-              }}>Cadastrar</Button>
+            <Button onPress={handleRegister}>Cadastrar</Button>
           </ButtonContainer>
 
         </Container>

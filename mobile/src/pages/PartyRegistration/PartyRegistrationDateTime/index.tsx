@@ -35,7 +35,7 @@ import {
 
 const PartyRegistrationDateTime = () => {
   const route = useRoute()
-  const {partyInfo} = route.params as PartyInfo
+  const { partyInfo } = route.params as PartyInfo
 
   const navigation = useNavigation()
 

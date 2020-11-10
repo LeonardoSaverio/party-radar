@@ -1,6 +1,5 @@
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
 
 import Header from '../components/Header'
 import DrawerContent from './DrawerContent'
@@ -121,7 +120,6 @@ const PartyRegistrationStack = () => (
 
 
 const AppRoutes = () => (
-  <NavigationContainer>
     <App.Navigator drawerContent={({ navigation }) => <DrawerContent navigation={navigation} />} >
       <App.Screen name="Home" component={HomeStack} options={{}} />
       <App.Screen name="Favorite" component={FavoriteStack} />
@@ -129,7 +127,6 @@ const AppRoutes = () => (
       <App.Screen name="MyPartys" component={MyPartysStack} />
       <App.Screen name="PartyRegistration" component={PartyRegistrationStack} options={{ gestureEnabled: false }} />
     </App.Navigator>
-  </NavigationContainer>
 )
 
 

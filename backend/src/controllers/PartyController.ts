@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { AdvancedConsoleLogger, getRepository } from 'typeorm';
+import { getRepository } from 'typeorm';
 import Party from '../models/Party';
 import partyView from '../views/party_view';
 import { validate } from 'class-validator'

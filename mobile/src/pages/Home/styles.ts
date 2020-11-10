@@ -52,9 +52,17 @@ export const MapMarkerImage = styled.Image`
   height: 50px;
 `;
 
-export const MapMarkerTitle = styled.Text`
- flex: 1;
- color: #40DF9F;
- font-size: 13px;
- line-height: 23px;
+export const CalloutContainer = styled.View`
+  width: 168px;
+  height: 46px;
+  padding-right: 16px;
+  padding-left: 16px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  justify-content: center;
+`;
+
+export const CalloutText = styled.Text`
+  color: #0089a5;
+  font-size: 14px;
 `;
